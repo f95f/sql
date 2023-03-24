@@ -111,13 +111,58 @@ insert into products
             (102, "Soda",  1.00),
             (103, "Ice Cream", 1.49);
             
+alter table products
+	modify price
+		decimal(4, 2) not null;
+		
 select * from products;
 
+alter table employees
+	add constraint chk_hourly_pay 
+		check(hourly_pay >= 10);
 
+select * from employees;
 
+alter table employees
+	drop check chk_hourly_pay;
+    
+-- Default --------------------
 
+insert into products
+	values	(104, "straw"),
+			(105, "napkin"),
+            (106, "fork"),
+            (107, "spoon");
+            
+select * from products;
 
+delete from products
+	where product_id > 103;
 
+alter table products 
+	alter price
+		set default 0;
 
+insert into products (product_id, product_name)
+	values	(104, "straw"),
+			(105, "napkin"),
+            (106, "fork"),
+            (107, "spoon");
+            
+-- Primary key ------------------
 
+create table transactions(
+	transaction_id int,
+    amount decimal (5, 2)
+);
 
+select * from transactions;
+
+alter table transactions
+	add constraint 
+		primary key(transaction_id);
+        
+insert into transactions
+	values	(1001, 3.38),
+			(1002, 4.95),
+            (1003, 5,54)
